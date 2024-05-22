@@ -17,7 +17,7 @@ peuvent s'inscrire, participer à des discussions, et gérer leur profil personn
 
 ## Project Overview
 
-This platform consists of five compartments first the first section with the most recent tags, the popular tags of the day, the subscriptions. The second section with the most popular tags or there will be several sections such as for example Leboncoin or budgets or motorcycle styles the third one always on the left of the site so depending on the motorcycles according to the rides or brands we will have a main chat in the middle of the page and then accompanied by a search bar end then last on the right of the page a fifth section where we will have the top ad of Leboncoin
+This forum consists in bringing back all type of motorcyclist for exchanges at the same time between impassioned then others on councils in particular, of the sale on the market ect...
 
 ## Prerequisites
 
@@ -59,10 +59,7 @@ After installation, follow these steps to run the platform:
 
 ## Description
 
-Guess the Song: Players guess the title of a song from a snippet of its lyrics.
-Blind Test: Identify songs as quickly as possible from audio clips.
-Petit Bac: A music-themed version of the classic game, challenging players to list music-related terms starting with a given letter.
-Each game is designed to test different aspects of your musical knowledge and reaction speed, offering a diverse and engaging experience.
+This platform consists of five compartments first the first section with the most recent tags, the popular tags of the day, the subscriptions. The second section with the most popular tags or there will be several sections such as for example Leboncoin or budgets or motorcycle styles the third one always on the left of the site so depending on the motorcycles according to the rides or brands we will have a main chat in the middle of the page and then accompanied by a search bar end then last on the right of the page a fifth section where we will have the top ad of Leboncoin
 
 ## Author
 
