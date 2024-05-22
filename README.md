@@ -66,8 +66,6 @@ Each game is designed to test different aspects of your musical knowledge and re
 
 ## Author
 
-- [@decorentin] (https://github.com/Decorentin)
 - [@Tokennn] (https://github.com/Tokennn)
 - [@M4xxes] (https://github.com/M4xxes)
-- [@TerminaTorr45] (https://github.com/TerminaTorr45)
-
+- [@delhadjm] (https://github.com/delhadjm)
