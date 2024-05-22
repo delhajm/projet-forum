@@ -61,7 +61,7 @@ After installation, follow these steps to run the platform:
 
 This platform consists of five compartments first the first section with the most recent tags, the popular tags of the day, the subscriptions. The second section with the most popular tags or there will be several sections such as for example Leboncoin or budgets or motorcycle styles the third one always on the left of the site so depending on the motorcycles according to the rides or brands we will have a main chat in the middle of the page and then accompanied by a search bar end then last on the right of the page a fifth section where we will have the top ad of Leboncoin
 
-## Author  💁
+## Author  
 
 - [@Tokennn] (https://github.com/Tokennn)
 - [@M4xxes] (https://github.com/M4xxes)
