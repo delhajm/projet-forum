@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/J7fVND2K)
 
-# Forum
+# Forum 👋
 
 Ce projet vise à offrir un espace où les utilisateurs
 peuvent s'inscrire, participer à des discussions, et gérer leur profil personnel.
