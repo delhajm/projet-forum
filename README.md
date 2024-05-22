@@ -12,12 +12,12 @@ peuvent s'inscrire, participer à des discussions, et gérer leur profil personn
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Games Description](#games-description)
+- [Description](#games-description)
 - [Author](#author)
 
 ## Project Overview
 
-This platform integrates three games: "Guess the Song", "Blind Test", and "Petit Bac", each offering a unique way to test your musical knowledge and reflexes. Players can create accounts, join games, and compete against friends while climbing the scoreboard to music glory.
+This platform consists of five compartments first the first section with the most recent tags, the popular tags of the day, the subscriptions. The second section with the most popular tags or there will be several sections such as for example Leboncoin or budgets or motorcycle styles the third one always on the left of the site so depending on the motorcycles according to the rides or brands we will have a main chat in the middle of the page and then accompanied by a search bar end then last on the right of the page a fifth section where we will have the top ad of Leboncoin
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ After installation, follow these steps to run the platform:
 
 3. Sign up or log in to start playing the games.
 
-## Games Description
+## Description
 
 Guess the Song: Players guess the title of a song from a snippet of its lyrics.
 Blind Test: Identify songs as quickly as possible from audio clips.
