@@ -55,7 +55,7 @@ After installation, follow these steps to run the platform:
 
 2. Navigate to http://localhost:8080 on your web browser to access the platform.
 
-3. Sign up or log in to start playing the games.
+3. Register or Log-in to talk!
 
 ## Description
 
