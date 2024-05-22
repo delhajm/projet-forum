@@ -2,8 +2,8 @@
 
 # Forum 👋
 
-Ce projet vise à offrir un espace où les utilisateurs
-peuvent s'inscrire, participer à des discussions, et gérer leur profil personnel.
+The aim of this project is to provide a space where users
+can register, take part in discussions and manage their personal profile.
 
 ## Index
 
