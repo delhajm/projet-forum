@@ -15,7 +15,7 @@ can register, take part in discussions and manage their personal profile.
 - [Description](#games-description)
 - [Author](#author)
 
-## Project Overview  💭
+## Project Overview  
 
 This forum consists in bringing back all type of motorcyclist for exchanges at the same time between impassioned then others on councils in particular, of the sale on the market ect...
 
