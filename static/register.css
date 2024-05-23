@@ -1,0 +1,63 @@
+/* style.css */
+
+/* Style de base pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Style pour le conteneur du formulaire */
+#registerForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les titres */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Style pour les libellés des champs */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Style pour les champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style pour le bouton de soumission */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Style pour le bouton de soumission au survol */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

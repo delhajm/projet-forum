@@ -1,0 +1,66 @@
+/* style.css */
+
+/* Reset des marges et des rembourrages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Style du conteneur du formulaire */
+#loginForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Style du titre */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style des labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style des champs de saisie */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style du bouton de soumission */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Style du bouton de soumission au survol */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

@@ -59,7 +59,9 @@ func main() {
 		log.Fatal(err)
 	}
 
+	http.HandleFunc("/register", index)
 	http.HandleFunc("/", index)
+
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	http.HandleFunc("/users", getUsers)
@@ -71,9 +73,13 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "web/index.html")
-}
+	if r.URL.Path == "/register" {
+		http.ServeFile(w, r, "web/register.html")
+		return
+	}
 
+	http.ServeFile(w, r, "web/login.html")
+}
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT id, name, email FROM users")
 	if err != nil {

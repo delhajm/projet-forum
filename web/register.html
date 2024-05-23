@@ -1,0 +1,44 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/register.css">
+    <title>Inscription</title>
+</head>
+<body>
+    <h1>Inscription</h1>
+    <form id="registerForm" action="/users/create" method="POST">
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <script>
+        function registerUser(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('registerForm'));
+            fetch('/users/create', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Inscription réussie');
+                    window.location.href = "/"; // Redirection vers la page de connexion après inscription réussie
+                } else {
+                    alert('Erreur lors de l\'inscription');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', registerUser);
+    </script>
+</body>
+</html>
