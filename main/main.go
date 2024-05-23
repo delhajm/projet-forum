@@ -19,7 +19,7 @@ var db *sql.DB
 
 func main() {
 	var err error
-	db, err = sql.Open("sqlite3", "./test.db")
+	db, err = sql.Open("sqlite3", "./base.db")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,6 +31,15 @@ func main() {
 	}
 
 	router := gin.Default()
+
+	// Servir les fichiers statiques
+	router.Static("/static", "./web")
+
+	// Définir la route pour servir le fichier HTML
+	router.LoadHTMLFiles("./web/index.html")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
 
 	router.GET("/users", getUsers)
 	router.POST("/users", createUser)
