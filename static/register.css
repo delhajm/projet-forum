@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #1E252B;
 }
 
 /* Style pour le conteneur du formulaire */
@@ -23,7 +23,7 @@ body {
 /* Style pour les titres */
 h1 {
     text-align: center;
-    color: #333;
+    color: #ffffff;
 }
 
 /* Style pour les libellés des champs */
