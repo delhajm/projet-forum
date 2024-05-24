@@ -8,17 +8,25 @@
     <title>Connexion</title>
 </head>
 <body>
-    <h1>Connexion</h1>
-    <form id="loginForm" action="/login" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Se connecter</button>
-        <p>Vous n'avez pas de compte ? <a href="/register" class="register-button">Inscrivez-vous ici</a>.</p>
-    </form>
-
-
+    <div class="container">
+        <div class="header">
+            <a href="#" class="back-button">&larr;</a>
+            <h1>Connexion</h1>
+        </div>
+        <form id="loginForm" action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <button type="submit" class="button">Se connecter</button>
+            <div class="divider">ou</div>
+            <a href="/register" class="button register-button">Inscrivez-vous ici</a>
+        </form>
+    </div>
 
     <script>
         function loginUser(event) {
