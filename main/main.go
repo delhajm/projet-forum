@@ -80,6 +80,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 	http.ServeFile(w, r, "web/login.html")
 }
+
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT id, name, email FROM users")
 	if err != nil {
@@ -139,8 +140,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Connexion réussie"))
+	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
@@ -198,5 +198,4 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
-
 }

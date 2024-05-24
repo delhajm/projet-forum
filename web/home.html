@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorum - Accueil</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Motorum</h2>
+            <form id="home" action="/home" method="POST">
+            <ul>
+                <li>Les plus récents</li>
+                <li>Populaire du jour</li>
+                <li>Abonnement</li>
+            </ul>
+            <div class="tags">
+                <h3>Tags populaires</h3>
+                <ul>
+                    <li>#LeBonCoin</li>
+                    <li>#Budget 10k</li>
+                    <li>#Supermoto</li>
+                    <li>#MotoGP</li>
+                    <li>#BMW</li>
+                </ul>
+            </div>
+            <div class="group">
+                <h3>Groupe épinglé</h3>
+                <ul>
+                    <li>#GS</li>
+                    <li>#Moto</li>
+                    <li>#Balade</li>
+                    <li>#Ducati</li>
+                </ul>
+            </div>
+        </nav>
+        <main class="content">
+            <header>
+                <input type="search" placeholder="Type here to search...">
+                <button>Créer un post</button>
+            </header>
+            <section class="posts">
+                <div class="post">
+                    <p class="username">Pavel Gvay <span class="time">il y a 3 semaines</span></p>
+                    <p>Salut tout le monde ! J'espère que vous allez bien. J'ai récemment vu une superbe Ducati Panigale V4, et je dois dire que je suis vraiment tenté. Qu'est-ce que vous en pensez ?</p>
+                    <div class="stats">
+                        <span>651,324 Vues</span>
+                        <span>36,654 J'aime</span>
+                        <span>56 commentaires</span>
+                    </div>
+                </div>
+                <div class="post">
+                    <p class="username">AR Jakir <span class="time">il y a 3 jours</span></p>
+                    <p>La Panigale V4 est incroyable ! C'est une bête de course. Je l'ai essayée une fois, et la puissance est juste phénoménale. Par contre, elle n'est pas très confortable pour les longues distances.</p>
+                    <div class="stats">
+                        <span>244,564 Vues</span>
+                        <span>10,920 J'aime</span>
+                        <span>184 commentaires</span>
+                    </div>
+                </div>
+                <div class="post">
+                    <p class="username">Mansurul Haque <span class="time">il y a 1 semaine</span></p>
+                    <p>Je suis d'accord, Sophie. La Panigale V4 est plus faite pour les circuits que pour les balades. Personnellement, je préfère les BMW GS pour les longs trajets. Elles sont beaucoup plus polyvalentes.</p>
+                    <div class="stats">
+                        <span>601,066 Vues</span>
+                        <span>24,753 J'aime</span>
+                        <span>209 commentaires</span>
+                    </div>
+                </div>
+                <div class="post">
+                    <p class="username">Michal Malewicz <span class="time">il y a 2 semaines</span></p>
+                    <p>Ah, les BMW GS ! C'est un choix solide pour le touring.</p>
+                    <div class="stats">
+                        <span>964,258 Vues</span>
+                        <span>64,755 J'aime</span>
+                        <span>44 commentaires</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <aside class="ads">
+            <h3>Leboncoin top annonce</h3>
+            <div class="ad">
+                <img src="moto1.jpg" alt="Moto">
+                <p>Bonjour je vends ma moto, un Z800 ABS de 2016 que j'ai bridé car je suis encore...</p>
+            </div>
+            <div class="ad">
+                <img src="moto2.jpg" alt="Moto">
+                <p>Bonjour je vends ma duke 790 de 2018 en très bon état prête à rouler, révision faite cher...</p>
+            </div>
+            <!-- Ajoutez d'autres annonces ici -->
+        </aside>
+    </div>
+</body>
+</html>
