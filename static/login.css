@@ -1,77 +1,109 @@
-/* style.css */
-
-/* Reset des marges et des rembourrages */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Style du corps de la page */
+/* login.css */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1E252B;
+    background-color: #1a1a1a;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Style du conteneur du formulaire */
-#loginForm {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+.container {
+    background-color: #666666;
+    border: 2px solid #f39c12;
+    border-radius: 15px;
+    padding: 40px;
+    width: 400px;
+    height: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Style du titre */
-h1 {
-    text-align: center;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-    color: #eeeeee;
 }
 
-/* Style des labels */
-label {
+.header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+    height: 10px;
+    width: 250px;
+    border-radius: 50%;
+}
+
+.header .back-button {
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    height: 100px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #fff;
     display: block;
     margin-bottom: 5px;
 }
 
-/* Style des champs de saisie */
-input[type="email"],
-input[type="password"] {
+.form-group input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Style du bouton de soumission */
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #444;
+    color: #ccc;
 }
 
-/* Style du bouton de soumission au survol */
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.form-group input::placeholder {
+    color: #888;
 }
-.register-button {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
+
+.button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: center;
+    display: block;
     text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+}
+.button:hover {
+    background-color: #f39c12;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ccc;
+    margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.divider::before {
+    margin-right: .25em;
+}
+
+.divider::after {
+    margin-left: .25em;
 }

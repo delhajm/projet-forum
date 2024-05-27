@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.sidebar, .sidebar-right {
+    width: 20%;
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    color: #FF5722;
+    margin-bottom: 20px;
+}
+
+.sidebar .sections .section,
+.sidebar .tags .tag,
+.sidebar-right .ad {
+    padding: 10px;
+    background-color: #333;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.sidebar .sections .section.active {
+    background-color: #FF5722;
+    color: #FFF;
+}
+
+.sidebar .tags h2, .sidebar-right h2 {
+    margin-bottom: 10px;
+}
+
+.sidebar .pinned-group {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.main {
+    width: 60%;
+    margin: 0 10px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.top-bar input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.top-bar .profile-button {
+    padding: 10px 20px;
+    background-color: #FF5722;
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.post-box {
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-box textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #FFF;
+    resize: none;
+    height: 100px;
+}
+
+.posts .post {
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.posts .post .author {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.posts .post .text {
+    margin-bottom: 10px;
+}
+
+.posts .post .tags .tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.posts .post .stats {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #AAA;
+}
+
+.sidebar-right .ad {
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

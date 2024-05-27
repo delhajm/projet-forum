@@ -1,63 +1,85 @@
-/* style.css */
-
-/* Style de base pour le corps de la page */
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: #1a1a1a;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1E252B;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Style pour le conteneur du formulaire */
-#registerForm {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.container {
+    background-color: #666666;
+    border: 2px solid #f39c12;
+    border-radius: 15px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Style pour les titres */
-h1 {
-    text-align: center;
-    color: #ffffff;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-/* Style pour les libellés des champs */
-label {
+.header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0;
+    height: 10px;
+    width: 250px;
+    border-radius: 50%;
+}
+
+.header .back-button {
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    height: 100px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #fff;
     display: block;
     margin-bottom: 5px;
-    color: #555;
 }
 
-/* Style pour les champs de saisie */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Style pour le bouton de soumission */
-button[type="submit"] {
+.form-group input {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #444;
+    color: #ccc;
 }
 
-/* Style pour le bouton de soumission au survol */
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.form-group input::placeholder {
+    color: #888;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #f39c12;
 }
