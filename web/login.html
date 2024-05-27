@@ -1,4 +1,3 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,27 +26,5 @@
             <a href="/register" class="button register-button">Inscrivez-vous ici</a>
         </form>
     </div>
-
-    <script>
-        function loginUser(event) {
-            event.preventDefault();
-            const formData = new FormData(document.getElementById('loginForm'));
-            fetch('/login', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Connexion réussie');
-                    window.location.href = "/dashboard"; // Redirection après connexion réussie
-                } else {
-                    alert('Erreur de connexion');
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', loginUser);
-    </script>
 </body>
 </html>

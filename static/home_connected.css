@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #181A1B;
+    color: #FFF;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1F2223;
+    color: #FFF;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #FF6B6B;
+}
+
+.sidebar .sections {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.sidebar .section {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sidebar .section a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar .section a:hover {
+    background-color: #FF6B6B;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.top-bar input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #2C2F33;
+    color: #FFF;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .username {
+    margin-right: 20px;
+}
+
+.profile-button, .create-post-button {
+    padding: 10px 20px;
+    background-color: #FF6B6B;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-button:hover, .create-post-button:hover {
+    background-color: #E55B5B;
+}
+
+.post-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.post-box textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2C2F33;
+    color: #FFF;
+    resize: none;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+}
+
+.posts .post {
+    background-color: #1F2223;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.posts .post .author {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.posts .post .text {
+    margin-bottom: 10px;
+}
+
+.posts .post .tags .tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.sidebar-right {
+    width: 250px;
+    background-color: #1F2223;
+    color: #FFF;
+    padding: 20px;
+}
+
+.sidebar-right .ad {
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

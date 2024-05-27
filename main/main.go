@@ -3,17 +3,20 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password,omitempty"`
 }
 
 var db *sql.DB
@@ -31,22 +34,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Vérifiez si la colonne "password" existe déjà
-	var columnExists bool
-	err = db.QueryRow("SELECT COUNT(*) FROM pragma_table_info('users') WHERE name='password'").Scan(&columnExists)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if !columnExists {
-		// Ajoutez la colonne "password" si elle n'existe pas
-		_, err = db.Exec(`ALTER TABLE users ADD COLUMN password TEXT;`)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	// Si la table n'existe pas, créez-la avec la nouvelle colonne
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,29 +46,31 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/register", index)
-	http.HandleFunc("/", index)
+	http.HandleFunc("/register", serveRegisterForm)
+	http.HandleFunc("/users/create", createUser)
+	http.HandleFunc("/login", login)
+	http.HandleFunc("/profile", profile)
+	http.HandleFunc("/profile/update", updateProfile)
+	http.HandleFunc("/profile/delete", deleteUser)
+	http.HandleFunc("/home_connected", homeConnected)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "web/home.html")
+	})
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	http.HandleFunc("/users", getUsers)
-	http.HandleFunc("/users/create", createUser)
-	http.HandleFunc("/login", login)
-	http.HandleFunc("/home", index)
 
 	log.Println("Serveur démarré sur le port 8080")
 	http.ListenAndServe(":8080", nil)
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
-	switch r.URL.Path {
-	case "/register":
+func serveRegisterForm(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
 		http.ServeFile(w, r, "web/register.html")
-	case "/login":
-		http.ServeFile(w, r, "web/login.html")
-	default:
-		http.ServeFile(w, r, "web/home.html")
+		return
 	}
+	http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
 }
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
@@ -113,7 +102,10 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
+	if r.Method == http.MethodGet {
+		http.ServeFile(w, r, "web/login.html")
+		return
+	} else if r.Method != http.MethodPost {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
 		return
 	}
@@ -126,8 +118,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var storedPassword string
-	err := db.QueryRow("SELECT password FROM users WHERE email = ?", email).Scan(&storedPassword)
+	var user User
+	err := db.QueryRow("SELECT id, name, email, password FROM users WHERE email = ?", email).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			http.Error(w, "Utilisateur non trouvé", http.StatusUnauthorized)
@@ -137,13 +129,13 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(password))
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
 		http.Error(w, "Mot de passe incorrect", http.StatusUnauthorized)
 		return
 	}
 
-	http.Redirect(w, r, "/home", http.StatusSeeOther)
+	http.Redirect(w, r, "/home_connected?id="+strconv.Itoa(user.ID), http.StatusSeeOther)
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
@@ -174,31 +166,153 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	}
 	defer stmt.Close()
 
-	result, err := stmt.Exec(name, email, string(hashedPassword))
+	_, err = stmt.Exec(name, email, string(hashedPassword))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	id, err := result.LastInsertId()
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
+
+func profile(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+	if id == "" {
+		http.Error(w, "ID utilisateur requis", http.StatusBadRequest)
+		return
+	}
+
+	var user User
+	err := db.QueryRow("SELECT id, name, email FROM users WHERE id = ?", id).Scan(&user.ID, &user.Name, &user.Email)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			http.Error(w, "Utilisateur non trouvé", http.StatusNotFound)
+		} else {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	tmpl, err := template.ParseFiles("web/profile.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	newUser := User{
-		ID:    int(id),
-		Name:  name,
-		Email: email,
+	err = tmpl.Execute(w, user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func updateProfile(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
 	}
 
-	jsonResponse, err := json.Marshal(newUser)
+	id := r.FormValue("id")
+	name := r.FormValue("name")
+	email := r.FormValue("email")
+	password := r.FormValue("password")
+
+	if id == "" || name == "" || email == "" {
+		http.Error(w, "L'ID, le nom et l'email sont requis", http.StatusBadRequest)
+		return
+	}
+
+	if password != "" {
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		stmt, err := db.Prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer stmt.Close()
+
+		_, err = stmt.Exec(name, email, string(hashedPassword), id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	} else {
+		stmt, err := db.Prepare("UPDATE users SET name = ?, email = ? WHERE id = ?")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer stmt.Close()
+
+		_, err = stmt.Exec(name, email, id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	http.Redirect(w, r, "/home_connected?id="+id, http.StatusSeeOther)
+}
+
+func deleteUser(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
+	}
+
+	id := r.FormValue("id")
+	if id == "" {
+		http.Error(w, "ID utilisateur requis", http.StatusBadRequest)
+		return
+	}
+
+	stmt, err := db.Prepare("DELETE FROM users WHERE id = ?")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(jsonResponse)
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func homeConnected(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+	if id == "" {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	var user User
+	err := db.QueryRow("SELECT id, name, email FROM users WHERE id = ?", id).Scan(&user.ID, &user.Name, &user.Email)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			http.Error(w, "Utilisateur non trouvé", http.StatusNotFound)
+		} else {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	tmpl, err := template.ParseFiles("web/home_connected.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
