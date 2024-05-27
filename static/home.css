@@ -1,116 +1,146 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
     display: flex;
-    background-color: #f4f4f4;
+    justify-content: center;
+    padding: 20px;
 }
 
 .container {
     display: flex;
     width: 100%;
+    max-width: 1200px;
 }
 
-.sidebar {
+.sidebar, .sidebar-right {
     width: 20%;
-    background-color: #1f1f1f;
-    color: white;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin: 0 10px;
 }
 
-.sidebar h2 {
-    margin-bottom: 30px;
+.sidebar .logo {
+    font-size: 24px;
+    color: #FF5722;
+    margin-bottom: 20px;
 }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
+.sidebar .sections .section,
+.sidebar .tags .tag,
+.sidebar-right .ad {
+    padding: 10px;
+    background-color: #333;
+    margin: 5px 0;
+    border-radius: 5px;
 }
 
-.sidebar ul li {
-    margin: 10px 0;
+.sidebar .sections .section.active {
+    background-color: #FF5722;
+    color: #FFF;
 }
 
-.tags, .group {
-    margin-top: 30px;
+.sidebar .tags h2, .sidebar-right h2 {
+    margin-bottom: 10px;
 }
 
-.content {
+.sidebar .pinned-group {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.main {
     width: 60%;
-    padding: 20px;
+    margin: 0 10px;
 }
 
-header {
+.top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
-header input[type="search"] {
-    width: 70%;
+.top-bar input {
+    width: 80%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
 }
 
-header button {
+.top-bar .profile-button {
     padding: 10px 20px;
-    background-color: orange;
+    background-color: #FF5722;
     border: none;
     border-radius: 5px;
-    color: white;
+    color: #FFF;
     cursor: pointer;
 }
 
-.posts .post {
-    background-color: white;
+.post-box {
     padding: 20px;
-    margin-bottom: 20px;
+    background-color: #1E1E1E;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.username {
-    font-weight: bold;
-}
-
-.username .time {
-    font-weight: normal;
-    color: #777;
-}
-
-.stats {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    color: #777;
-}
-
-.ads {
-    width: 20%;
-    padding: 20px;
-}
-
-.ads h3 {
     margin-bottom: 20px;
 }
 
-.ad {
-    background-color: white;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.ad img {
+.post-box textarea {
     width: 100%;
-    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #FFF;
+    resize: none;
+    height: 100px;
 }
 
-.ad p {
+.posts .post {
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.posts .post .author {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.posts .post .text {
+    margin-bottom: 10px;
+}
+
+.posts .post .tags .tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.posts .post .stats {
     margin-top: 10px;
-    color: #333;
+    font-size: 14px;
+    color: #AAA;
+}
+
+.sidebar-right .ad {
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
