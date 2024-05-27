@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Compiler l'application Go
-RUN go build -o main .
+RUN go build .
 
 # Utiliser une image de base légère pour exécuter l'application compilée
 FROM alpine:latest
@@ -24,3 +24,4 @@ EXPOSE 8080
 
 # Commande pour démarrer l'application
 CMD ["./main"]
+
