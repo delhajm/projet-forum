@@ -81,6 +81,9 @@ body {
     display: block;
     text-decoration: none;
 }
+.button:hover {
+    background-color: #f39c12;
+}
 
 .divider {
     display: flex;

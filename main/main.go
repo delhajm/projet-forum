@@ -67,19 +67,23 @@ func main() {
 	http.HandleFunc("/users", getUsers)
 	http.HandleFunc("/users/create", createUser)
 	http.HandleFunc("/login", login)
+	http.HandleFunc("/home", index)
 
 	log.Println("Serveur démarré sur le port 8080")
 	http.ListenAndServe(":8080", nil)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/register" {
+	switch r.URL.Path {
+	case "/register":
 		http.ServeFile(w, r, "web/register.html")
-		return
+	case "/login":
+		http.ServeFile(w, r, "web/login.html")
+	default:
+		http.ServeFile(w, r, "web/home.html")
 	}
-
-	http.ServeFile(w, r, "web/login.html")
 }
+
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT id, name, email FROM users")
 	if err != nil {
@@ -139,8 +143,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Connexion réussie"))
+	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
@@ -198,5 +201,4 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
-
 }
