@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	//"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go"
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
