@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"time"
 
-	//"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go"
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
@@ -74,6 +73,7 @@ func main() {
 	http.HandleFunc("/users/create", createUser)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/home", index)
+	http.HandleFunc("/post", index)
 
 	log.Println("Serveur démarré sur le port 8080")
 	http.ListenAndServe(":8080", nil)
@@ -85,10 +85,23 @@ func index(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "web/register.html")
 	case "/login":
 		http.ServeFile(w, r, "web/login.html")
+	case "/post":
+		http.ServeFile(w, r, "web/post.html")
 	default:
 		http.ServeFile(w, r, "web/home.html")
 	}
 }
+
+// func index(w http.ResponseWriter, r *http.Request) {
+// 	switch r.URL.Path {
+// 	case "/register":
+// 		http.ServeFile(w, r, "web/register.html")
+// 	case "/login":
+// 		http.ServeFile(w, r, "web/login.html")
+// 	default:
+// 		http.ServeFile(w, r, "web/home.html")
+// 	}
+// }
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT id, name, email FROM users")
