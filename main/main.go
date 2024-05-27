@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -17,6 +19,12 @@ type User struct {
 }
 
 var db *sql.DB
+var jwtKey = []byte("votre_secret")
+
+type Claims struct {
+	Email string `json:"email"`
+	jwt.StandardClaims
+}
 
 func main() {
 	var err error
@@ -31,7 +39,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Vérifiez si la colonne "password" existe déjà
 	var columnExists bool
 	err = db.QueryRow("SELECT COUNT(*) FROM pragma_table_info('users') WHERE name='password'").Scan(&columnExists)
 	if err != nil {
@@ -39,14 +46,12 @@ func main() {
 	}
 
 	if !columnExists {
-		// Ajoutez la colonne "password" si elle n'existe pas
 		_, err = db.Exec(`ALTER TABLE users ADD COLUMN password TEXT;`)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
 
-	// Si la table n'existe pas, créez-la avec la nouvelle colonne
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,7 +69,7 @@ func main() {
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	http.HandleFunc("/users", getUsers)
+	http.HandleFunc("/users", authenticate(getUsers))
 	http.HandleFunc("/users/create", createUser)
 	http.HandleFunc("/login", login)
 
@@ -80,6 +85,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 	http.ServeFile(w, r, "web/login.html")
 }
+
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT id, name, email FROM users")
 	if err != nil {
@@ -139,7 +145,27 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	expirationTime := time.Now().Add(5 * time.Minute)
+	claims := &Claims{
+		Email: email,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.SetCookie(w, &http.Cookie{
+		Name:    "token",
+		Value:   tokenString,
+		Expires: expirationTime,
+	})
+
 	w.Write([]byte("Connexion réussie"))
 }
 
@@ -198,5 +224,39 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
+}
 
+func authenticate(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("token")
+		if err != nil {
+			if err == http.ErrNoCookie {
+				http.Error(w, "Non autorisé", http.StatusUnauthorized)
+				return
+			}
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		tokenStr := cookie.Value
+		claims := &Claims{}
+
+		token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				http.Error(w, "Signature du token invalide", http.StatusUnauthorized)
+				return
+			}
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		if !token.Valid {
+			http.Error(w, "Token invalide", http.StatusUnauthorized)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	}
 }
