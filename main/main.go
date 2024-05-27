@@ -19,6 +19,14 @@ type User struct {
 	Password string `json:"password,omitempty"`
 }
 
+type Post struct {
+	ID        int    `json:"id"`
+	UserID    int    `json:"user_id"`
+	UserName  string `json:"user_name"`
+	Content   string `json:"content"`
+	CreatedAt string `json:"created_at"`
+}
+
 var db *sql.DB
 
 func main() {
@@ -46,6 +54,19 @@ func main() {
 		log.Fatal(err)
 	}
 
+	_, err = db.Exec(`
+		CREATE TABLE IF NOT EXISTS posts (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			user_id INTEGER NOT NULL,
+			content TEXT NOT NULL,
+			created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+			FOREIGN KEY(user_id) REFERENCES users(id)
+		)
+	`)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	http.HandleFunc("/register", serveRegisterForm)
 	http.HandleFunc("/users/create", createUser)
 	http.HandleFunc("/login", login)
@@ -53,6 +74,10 @@ func main() {
 	http.HandleFunc("/profile/update", updateProfile)
 	http.HandleFunc("/profile/delete", deleteUser)
 	http.HandleFunc("/home_connected", homeConnected)
+	http.HandleFunc("/post/create", createPost)
+	http.HandleFunc("/post/update", updatePost)
+	http.HandleFunc("/post/delete", deletePost)
+	http.HandleFunc("/posts", getPosts)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "web/home.html")
 	})
@@ -222,37 +247,32 @@ func updateProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var stmt *sql.Stmt
+	var err error
 	if password != "" {
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		hashedPassword, hashErr := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		if hashErr != nil {
+			http.Error(w, hashErr.Error(), http.StatusInternalServerError)
+			return
+		}
+		stmt, err = db.Prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		stmt, err := db.Prepare("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?")
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		defer stmt.Close()
-
 		_, err = stmt.Exec(name, email, string(hashedPassword), id)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
 	} else {
-		stmt, err := db.Prepare("UPDATE users SET name = ?, email = ? WHERE id = ?")
+		stmt, err = db.Prepare("UPDATE users SET name = ?, email = ? WHERE id = ?")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		defer stmt.Close()
-
 		_, err = stmt.Exec(name, email, id)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+	}
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	http.Redirect(w, r, "/home_connected?id="+id, http.StatusSeeOther)
@@ -315,4 +335,128 @@ func homeConnected(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func createPost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
+	}
+
+	userID := r.FormValue("user_id")
+	content := r.FormValue("content")
+
+	if userID == "" || content == "" {
+		http.Error(w, "L'ID utilisateur et le contenu sont requis", http.StatusBadRequest)
+		return
+	}
+
+	stmt, err := db.Prepare("INSERT INTO posts(user_id, content) VALUES(?, ?)")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(userID, content)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/home_connected?id="+userID, http.StatusSeeOther)
+}
+
+func updatePost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
+	}
+
+	postID := r.FormValue("post_id")
+	userID := r.FormValue("user_id")
+	content := r.FormValue("content")
+
+	if postID == "" || userID == "" || content == "" {
+		http.Error(w, "L'ID du post, l'ID utilisateur et le contenu sont requis", http.StatusBadRequest)
+		return
+	}
+
+	stmt, err := db.Prepare("UPDATE posts SET content = ? WHERE id = ? AND user_id = ?")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(content, postID, userID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/home_connected?id="+userID, http.StatusSeeOther)
+}
+
+func deletePost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
+	}
+
+	postID := r.FormValue("post_id")
+	userID := r.FormValue("user_id")
+
+	if postID == "" || userID == "" {
+		http.Error(w, "L'ID du post et l'ID utilisateur sont requis", http.StatusBadRequest)
+		return
+	}
+
+	stmt, err := db.Prepare("DELETE FROM posts WHERE id = ? AND user_id = ?")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(postID, userID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/home_connected?id="+userID, http.StatusSeeOther)
+}
+
+func getPosts(w http.ResponseWriter, r *http.Request) {
+	rows, err := db.Query(`
+		SELECT posts.id, posts.user_id, users.name, posts.content, posts.created_at
+		FROM posts
+		JOIN users ON posts.user_id = users.id
+		ORDER BY posts.created_at DESC
+	`)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	posts := []Post{}
+	for rows.Next() {
+		var post Post
+		if err := rows.Scan(&post.ID, &post.UserID, &post.UserName, &post.Content, &post.CreatedAt); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		posts = append(posts, post)
+	}
+
+	jsonResponse, err := json.Marshal(posts)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
 }

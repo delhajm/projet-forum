@@ -34,12 +34,15 @@
                     <button class="profile-button" onclick="location.href='/profile?id={{.ID}}'">Modifier le profil</button>
                 </div>
             </div>
-            <div class="post-box">
-                <textarea placeholder="Partage ce qu'il te vient à l'esprit..."></textarea>
-                <button class="create-post-button">Créer un post</button>
-            </div>
+            <form id="postForm" action="/post/create" method="post">
+                <input type="hidden" name="user_id" value="{{.ID}}">
+                <div class="post-box">
+                    <textarea name="content" placeholder="Partageons ce qui se passe dans votre esprit..."></textarea>
+                    <button type="submit" class="create-post-button">Créer un post</button>
+                </div>
+            </form>
             <div class="posts">
-                <!-- Posts content -->
+                <!-- Les posts seront chargés ici -->
             </div>
         </main>
         <aside class="sidebar-right">
@@ -52,5 +55,54 @@
             <div class="ad">Je vend ma KTM 690 SM-C R, pour passer sur un roadster.</div>
         </aside>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userId = "{{.ID}}";
+            if (userId) {
+                fetch(`/posts`)
+                    .then(response => response.json())
+                    .then(posts => {
+                        const postsContainer = document.querySelector('.posts');
+                        posts.forEach(post => {
+                            const postElement = document.createElement('div');
+                            postElement.className = 'post';
+                            postElement.innerHTML = `
+                                <div class="post-header">
+                                    <h3>${post.user_name}</h3>
+                                </div>
+                                <p>${post.content}</p>
+                                <small>${post.created_at}</small>
+                                ${post.user_id == userId ? `
+                                <form action="/post/delete" method="post" style="display:inline;">
+                                    <input type="hidden" name="post_id" value="${post.id}">
+                                    <input type="hidden" name="user_id" value="${post.user_id}">
+                                    <button type="submit" class="delete-post-button">Supprimer</button>
+                                </form>
+                                <button class="edit-post-button" onclick="editPost(${post.id}, '${post.content}')">Modifier</button>
+                                ` : ''}
+                            `;
+                            postsContainer.appendChild(postElement);
+                        });
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            }
+        });
+
+        function editPost(postId, currentContent) {
+            const newContent = prompt("Modifier votre post:", currentContent);
+            if (newContent !== null && newContent !== "") {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = '/post/update';
+                form.innerHTML = `
+                    <input type="hidden" name="post_id" value="${postId}">
+                    <input type="hidden" name="user_id" value="${userId}">
+                    <input type="hidden" name="content" value="${newContent}">
+                `;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -9,11 +9,6 @@
 <body>
     <div class="container">
         <h1>Mon Profil</h1>
-        <div class="photo-upload">
-            <img src="/static/default-profile.png" alt="Photo de profil">
-            <input type="file" id="upload-photo">
-            <label for="upload-photo">Importer une photo</label>
-        </div>
         <form id="profileForm" action="/profile/update" method="post">
             <input type="hidden" name="id" value="{{.ID}}">
             <div class="profile-section">
