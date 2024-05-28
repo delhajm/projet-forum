@@ -55,7 +55,7 @@ After installation, follow these steps to run the platform:
 
 2. Navigate to http://localhost:8080 on your web browser to access the platform.
 
-<OR>
+`OR`
 
 3. You can try the r
 
