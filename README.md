@@ -30,6 +30,7 @@ For this project we worked on these technologies
 * [![Html][Html]][Html-url]
 * [![Css][Css]][Css-url]
 * [![Go][Go]][Go-url]
+* [![JS][JS]][JS-url]
 
 
 <p align="right">(<a href="#readme-top"><strong>Back to top</strong></a>)</p>
@@ -103,13 +104,19 @@ This platform consists of five compartments first the first section with the mos
 - [@delhadjm] (https://github.com/delhadjm)
 
 
-[Html]: https://img.shields.io/badge/Html-FC4100
+[Html]: https://img.shields.io/badge/HTML5-grey?style=for-the-badge&logo=html5
 [Html-url]: https://www.w3schools.com/html/
 
-[Css]: https://img.shields.io/badge/Css-8A2BE2
+[Css]: https://img.shields.io/badge/CSS-grey?style=for-the-badge&logo=css3&logoColor=blue
 [Css-url]: https://www.w3schools.com/css/
 
-[Go]: https://img.shields.io/badge/Css-5BBCFF
+[Go]: https://img.shields.io/badge/Go-grey?style=for-the-badge&logo=go
 [Go-url]: https://go.dev/
+
+
+
+[JS]:  https://img.shields.io/badge/JavaScript-grey?style=for-the-badge&logo=javascript
+[JS-url]: https://www.javascript.com/
+
 
 [product-screenshot]: images/screenshot.png
