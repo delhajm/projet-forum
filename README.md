@@ -7,6 +7,8 @@
 The aim of this project is to provide a space where users
 can register, take part in discussions and manage their personal profile.
 
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
 ## Index
 
 - [Index](#index)
@@ -109,3 +111,5 @@ This platform consists of five compartments first the first section with the mos
 
 [Go]: https://img.shields.io/badge/Css-5BBCFF
 [Go-url]: https://go.dev/
+
+[product-screenshot]: images/screenshot.png
