@@ -196,3 +196,6 @@ body {
     flex-direction: column;
   }
 }
+footer.footer {
+    background-color: #181A1B;
+}

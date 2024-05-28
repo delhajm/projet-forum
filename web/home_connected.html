@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motorum - Accueil</title>
     <link rel="stylesheet" href="/static/home_connected.css">
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa; /* Modifier cette couleur pour correspondre à celle du site */
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -32,6 +43,7 @@
                 <div class="user-info">
                     <span class="username">{{.Name}}</span>
                     <button class="profile-button" onclick="location.href='/profile?id={{.ID}}'">Modifier le profil</button>
+                    <button class="profile-button" onclick="location.href='/logout'">Déconnexion</button>
                 </div>
             </div>
             <form id="postForm" action="/post/create" method="post">
@@ -51,9 +63,12 @@
             <div class="ad">Bonjour je vend mon duke 790 de 2018 en très bon état prête à rouler, révision faite cher...</div>
             <div class="ad">Je vends une Suzuki GSR 750 en excellent état...</div>
             <div class="ad">SPEED TRIPLE 1050 avec ABS Mise en circulation 05/2015</div>
-            <div class="ad">Km 980 R avec le tech pack. Moto en parfait état, entretien 100% chez KTM. Révision récente.</div>
+            <div class="ad">Ktm 890 R avec le tech pack. Moto en parfait état, entretien 100% chez KTM. Révision récente.</div>
             <div class="ad">Je vend ma KTM 690 SM-C R, pour passer sur un roadster.</div>
         </aside>
+        <footer class="footer">
+            <p>&copy; 2024 Motorum. Tous droits réservés.</p>
+        </footer>
     </div>
 <div class="footer-container">
   <footer class="footer">
