@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="stylesheet" href="/static/css/profile.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mon Profil</h1>
+        <form id="profileForm" action="/profile/update" method="post">
+            <input type="hidden" name="id" value="{{.ID}}">
+            <div class="profile-section">
+                <label for="name">Pseudo</label>
+                <input type="text" id="name" name="name" value="{{.Name}}">
+            </div>
+            <div class="profile-section">
+                <label for="email">Adresse mail</label>
+                <input type="email" id="email" name="email" value="{{.Email}}">
+            </div>
+            <div class="profile-section">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe">
+            </div>
+            <button type="submit" class="update-button">Valider</button>
+        </form>
+        <form id="deleteForm" action="/profile/delete" method="post">
+            <input type="hidden" name="id" value="{{.ID}}">
+            <button type="submit" class="delete-button">Supprimer mon compte</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('id');
+
+            if (userId) {
+                fetch(`/profile?id=${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector('input[name="id"]').value = data.id;
+                        document.querySelector('input[name="name"]').value = data.name;
+                        document.querySelector('input[name="email"]').value = data.email;
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            }
+        });
+    </script>
+</body>
+</html>

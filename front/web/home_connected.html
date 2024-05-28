@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorum - Accueil</title>
+    <link rel="stylesheet" href="/static/home_connected.css">
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa; /* Modifier cette couleur pour correspondre à celle du site */
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">Motorum</div>
+            <div class="sections">
+                <div class="section active">Les plus récents</div>
+                <div class="section">Populaire du jour</div>
+                <div class="section">Abonnement</div>
+            </div>
+            <div class="tags">
+                <h2>Tags populaires</h2>
+                <div class="tag">#LeBoncoin</div>
+                <div class="tag">#Budget 10K</div>
+                <div class="tag">#Budget 5K</div>
+                <div class="tag">#Supermot</div>
+                <div class="tag">#MotoGP</div>
+                <div class="tag">#BMW</div>
+            </div>
+            <div class="pinned-group">Groupe épinglé</div>
+        </aside>
+        <main class="content">
+            <div class="top-bar">
+                <input type="text" placeholder="Tapez ici pour chercher...">
+                <div class="user-info">
+                    <span class="username">{{.Name}}</span>
+                    <button class="profile-button" onclick="location.href='/profile?id={{.ID}}'">Modifier le profil</button>
+                    <button class="profile-button" onclick="location.href='/logout'">Déconnexion</button>
+                </div>
+            </div>
+            <form id="postForm" action="/post/create" method="post">
+                <input type="hidden" name="user_id" value="{{.ID}}">
+                <div class="post-box">
+                    <textarea name="content" placeholder="Partageons ce qui se passe dans votre esprit..."></textarea>
+                    <button type="submit" class="create-post-button">Créer un post</button>
+                </div>
+            </form>
+            <div class="posts">
+                <!-- Les posts seront chargés ici -->
+            </div>
+        </main>
+        <aside class="sidebar-right">
+            <h2>Leboncoin top annonce</h2>
+            <div class="ad">Bonjour je vends ma moto, un Z800 abs de 2016 que j'ai bridé car je suis encore...</div>
+            <div class="ad">Bonjour je vend mon duke 790 de 2018 en très bon état prête à rouler, révision faite cher...</div>
+            <div class="ad">Je vends une Suzuki GSR 750 en excellent état...</div>
+            <div class="ad">SPEED TRIPLE 1050 avec ABS Mise en circulation 05/2015</div>
+            <div class="ad">Ktm 890 R avec le tech pack. Moto en parfait état, entretien 100% chez KTM. Révision récente.</div>
+            <div class="ad">Je vend ma KTM 690 SM-C R, pour passer sur un roadster.</div>
+        </aside>
+        <footer class="footer">
+            <p>&copy; 2024 Motorum. Tous droits réservés.</p>
+        </footer>
+    </div>
+<div class="footer-container">
+  <footer class="footer">
+    <p>© 2024 Motorum. Tous droits réservés.</p>
+    <p>
+      <a href="#">Politique de confidentialité</a> |
+      <a href="#">Conditions d'utilisation</a> |
+      <a href="#">Contactez-nous</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>
