@@ -83,7 +83,7 @@ After installation, follow these steps to run the platform:
 
 `OR`
 
-3. You can try the r
+3. You can try the "**real**" forum online on : **`149.56.141.86`** 
 
 3. Register or Log-in to talk !
 
