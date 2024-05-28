@@ -1,5 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/J7fVND2K)
 
+<p align="center">
+  <img src="images/Capture%20d’écran%202024-05-29%20à%2001.55.55.png" alt="Your image alt text" width="300">
+</p>
+
 <a name="readme-top"></a>
 
 # Forum 👋
