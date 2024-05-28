@@ -1,5 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/J7fVND2K)
 
+<a name="readme-top"></a>
+
 # Forum 👋
 
 The aim of this project is to provide a space where users
@@ -18,6 +20,22 @@ can register, take part in discussions and manage their personal profile.
 ## Project Overview  
 
 This forum consists in bringing back all type of motorcyclist for exchanges at the same time between impassioned then others on councils in particular, of the sale on the market ect...
+
+### Built With
+
+For this project we worked on these technologies 
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Prerequisites
 
@@ -67,7 +85,7 @@ After installation, follow these steps to run the platform:
 
 This platform consists of five compartments first the first section with the most recent tags, the popular tags of the day, the subscriptions. The second section with the most popular tags or there will be several sections such as for example Leboncoin or budgets or motorcycle styles the third one always on the left of the site so depending on the motorcycles according to the rides or brands we will have a main chat in the middle of the page and then accompanied by a search bar end then last on the right of the page a fifth section where we will have the top ad of Leboncoin
 
-## Author  
+## Contact  
 
 - [@Tokennn] (https://github.com/Tokennn)
 - [@M4xxes] (https://github.com/M4xxes)
