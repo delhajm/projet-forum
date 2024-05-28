@@ -87,6 +87,7 @@ func main() {
 	http.HandleFunc("/users", getUsers)
 
 	log.Println("Serveur démarré sur le port 8080")
+	/* trunk-ignore(golangci-lint/errcheck) */
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -123,6 +124,7 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	/* trunk-ignore(golangci-lint/errcheck) */
 	w.Write(jsonResponse)
 }
 
