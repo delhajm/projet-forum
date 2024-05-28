@@ -68,24 +68,24 @@ For this project we worked on these technologies
     go get github.com/mattn/go-sqlite3
     go get github.com/gosimple/unidecode
 
-<p align="right">(<a href="#readme-top"><strong>Back to top</strong></a>)</p>
+<p align="right">(<a href="#readme-top"><strong><span style="color:red">Back to top</span></strong></a>)</p>
 
 
 ## Getting Started  
 
 After installation, follow these steps to run the platform:
 
-1. Start the server:
+1. __Start__ the server:
     ```bash
     go run main/main.go
 
-2. Navigate to http://localhost:8080 on your web browser to access the platform.
+2. __Navigate__ to http://localhost:8080 on your web browser to access the platform.
 
 `OR`
 
 3. You can try the "**real**" forum online on : **`149.56.141.86`** 
 
-3. Register or Log-in to talk !
+3. __Register or Log-in to talk__ !
 
 <p align="right">(<a href="#readme-top"><strong>Back to top</strong></a>)</p>
 
@@ -99,10 +99,12 @@ This platform consists of five compartments first the first section with the mos
 
 ## Contact  
 
-- [@Tokennn] (https://github.com/Tokennn)
-- [@M4xxes] (https://github.com/M4xxes)
-- [@delhadjm] (https://github.com/delhadjm)
+- __[@Tokennn]__ (https://github.com/Tokennn)
+- __[@M4xxes]__ (https://github.com/M4xxes)
+- __[@delhadjm]__ (https://github.com/delhadjm)
 
+
+<!-- (Markdown img link) : -->
 
 [Html]: https://img.shields.io/badge/HTML5-grey?style=for-the-badge&logo=html5
 [Html-url]: https://www.w3schools.com/html/
