@@ -68,7 +68,7 @@ For this project we worked on these technologies
     go get github.com/mattn/go-sqlite3
     go get github.com/gosimple/unidecode
 
-<p align="right">(<a href="#readme-top"><strong><span style="color:red">Back to top</span></strong></a>)</p>
+<p align="right">(<a href="#readme-top"><strong>Back to top</strong></a>)</p>
 
 
 ## Getting Started  
