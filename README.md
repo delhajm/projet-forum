@@ -101,5 +101,11 @@ This platform consists of five compartments first the first section with the mos
 - [@delhadjm] (https://github.com/delhadjm)
 
 
-[Html]: https://img.shields.io/badge/Html-8A2BE2
+[Html]: https://img.shields.io/badge/Html-FC4100
 [Html-url]: https://www.w3schools.com/html/
+
+[Css]: https://img.shields.io/badge/Css-8A2BE2
+[Css-url]: https://www.w3schools.com/css/
+
+[Go]: https://img.shields.io/badge/Css-5BBCFF
+[Go-url]: https://go.dev/
