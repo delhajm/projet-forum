@@ -20,8 +20,8 @@ can register, take part in discussions and manage their personal profile.
 This forum consists in bringing back all type of motorcyclist for exchanges at the same time between impassioned then others on councils in particular, of the sale on the market ect...
 
 ## Prerequisites  
-
-To get started with this project, you'll need:
+> [!IMPORTANT]
+> To get started with this project, you'll need:
 
 - [Go](https://go.dev/doc/install) installed on your local machine for backend development.
 - [Git](https://git-scm.com/downloads) for version control and collaboration.
