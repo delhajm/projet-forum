@@ -1,24 +1,16 @@
-package main
+package api
 
 import (
 	"database/sql"
 	"encoding/json"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/dgrijalva/jwt-go"
-	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
 )
 
-type User struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password,omitempty"`
-}
+var db *sql.DB
 
 type Post struct {
 	ID        int    `json:"id"`
@@ -28,6 +20,7 @@ type Post struct {
 	CreatedAt string `json:"created_at"`
 }
 
+<<<<<<< HEAD:main/main.go
 var db *sql.DB
 var jwtKey = []byte("votre_secret")
 
@@ -98,6 +91,13 @@ func main() {
 
 	log.Println("Serveur démarré sur le port 8080")
 	http.ListenAndServe(":8080", nil)
+=======
+type User struct {
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password,omitempty"`
+>>>>>>> dev:api/handlers.go
 }
 
 func index(w http.ResponseWriter, r *http.Request)  {
@@ -426,7 +426,6 @@ func updatePost(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/home_connected?id="+userID, http.StatusSeeOther)
 }
-
 func deletePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
@@ -459,11 +458,11 @@ func deletePost(w http.ResponseWriter, r *http.Request) {
 
 func getPosts(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`
-		SELECT posts.id, posts.user_id, users.name, posts.content, posts.created_at
-		FROM posts
-		JOIN users ON posts.user_id = users.id
-		ORDER BY posts.created_at DESC
-	`)
+			SELECT posts.id, posts.user_id, users.name, posts.content, posts.created_at
+			FROM posts
+			JOIN users ON posts.user_id = users.id
+			ORDER BY posts.created_at DESC
+		`)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -488,39 +487,4 @@ func getPosts(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonResponse)
-}
-
-func authenticate(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		cookie, err := r.Cookie("token")
-		if err != nil {
-			if err == http.ErrNoCookie {
-				http.Error(w, "Non autorisé", http.StatusUnauthorized)
-				return
-			}
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		tokenStr := cookie.Value
-		claims := &Claims{}
-
-		token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
-			return jwtKey, nil
-		})
-		if err != nil {
-			if err == jwt.ErrSignatureInvalid {
-				http.Error(w, "Signature du token invalide", http.StatusUnauthorized)
-				return
-			}
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		if !token.Valid {
-			http.Error(w, "Token invalide", http.StatusUnauthorized)
-			return
-		}
-
-		next.ServeHTTP(w, r)
-	}
 }
