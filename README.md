@@ -11,7 +11,7 @@
 The aim of this project is to provide a space where users
 can register, take part in discussions and manage their personal profile.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://p4d4.fr)
 
 ## Index
 
