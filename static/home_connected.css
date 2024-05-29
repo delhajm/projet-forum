@@ -1,0 +1,250 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #181a1b;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #1f2223;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+}
+
+.sidebar .sections {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.sidebar .section {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sidebar .section a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar .section a:hover {
+  background-color: #ff6b6b;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.top-bar input {
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #2c2f33;
+  color: #fff;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .username {
+  margin-right: 20px;
+}
+
+.profile-button,
+.create-post-button {
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover,
+.create-post-button:hover {
+  background-color: #e55b5b;
+}
+
+.post-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.post-box textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2c2f33;
+  color: #fff;
+  resize: none;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.posts .post {
+  background-color: #1f2223;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.posts .post .author {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.posts .post .text {
+  margin-bottom: 10px;
+}
+
+.posts .post .tags .tag {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px 5px 0 0;
+  background-color: #333;
+  border-radius: 5px;
+}
+
+.sidebar-right {
+  width: 250px;
+  background-color: #1f2223;
+  color: #fff;
+  padding: 20px;
+}
+
+.sidebar-right .ad {
+  padding: 10px;
+  background-color: #333;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* CSS pour le footer */
+.footer {
+  background-color: #121212;
+  color: #e0e0e0;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-section h4 {
+  color: #ff5722;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.footer-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+}
+
+/* CSS pour le footer */
+.footer {
+  background-color: #121212;
+  color: #e0e0e0;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-section h4 {
+  color: #ff5722;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.footer-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+}
+footer.footer {
+    background-color: #181A1B;
+}

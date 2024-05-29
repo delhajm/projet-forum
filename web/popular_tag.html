@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorum - Popular Tags</title>
+    <link rel="stylesheet" href="/static/popular_tag.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Motorum</div>
+        <div class="nav-links">
+            <button onclick="window.location.href='/home_connected'">Accueil</button>
+            <button onclick="window.location.href='/groups'">Groupes</button>
+            <button onclick="window.location.href='/calendar'">Calendrier</button>
+            <input type="text" placeholder="Barre de recherche">
+            <button>Notifications</button>
+            <button onclick="window.location.href='/login'">Se connecter</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="filter">
+            <h3>Filtre</h3>
+            <div>
+                <label>Tags:</label>
+                <input type="text" id="tags">
+            </div>
+            <div>
+                <label>Excluded tags:</label>
+                <input type="text" id="excluded-tags">
+            </div>
+            <div>
+                <label>Word count:</label>
+                <button id="word-count-dec">-</button>
+                <span id="word-count">0</span>
+                <button id="word-count-inc">+</button>
+            </div>
+        </div>
+
+        <div class="posts">
+            <div class="post">
+                <div class="tags">Popular Tags</div>
+                <div class="text">TEXT</div>
+                <div class="actions">
+                    <button>Like</button>
+                    <input type="text" placeholder="Commentaires">
+                </div>
+            </div>
+            <!-- Add more posts as needed -->
+        </div>
+    </div>
+
+    <script src="/static/popular.js"></script>
+</body>
+</html>
